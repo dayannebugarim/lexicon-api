@@ -1,7 +1,6 @@
-
-import express from 'express'
+import { router } from './routes/WordRoute';
+import express from 'express';
 import { config } from 'dotenv';
-import { Request, Response } from 'express';
 import { MongoClient } from './database/mongo';
 
 const main = async () => {
@@ -10,9 +9,7 @@ const main = async () => {
     await MongoClient.connect();
     const port = process.env.PORT || 8000;
 
-    app.get('/test', (req: Request, res: Response) => {
-        res.json({ message: 'NodeJS with Typescript' });
-    });
+    app.use('/word', router);
 
     app.listen(port, () => {
         console.log(`Running at http://localhost:${port}`);
