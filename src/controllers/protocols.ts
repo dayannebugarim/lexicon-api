@@ -1,21 +1,12 @@
-export interface HttpResponse<T> {
-    statusCode: HttpStatusCode;
-    body: T;
-}
-
-export interface HttpRequest<B> {
-    params?: any;
-    headers?: any;
-    body?: B;
-}
+import { Response } from "express";
 
 export enum HttpStatusCode {
     OK = 200,
-    CREATED = 201,
     BAD_REQUEST = 400,
-    SERVER_ERROR = 500,
+    NOT_FOUND = 404,
+    INTERNAL_SERVER = 500,
 }
 
-export interface IController {
-    handle(httpRequest: HttpRequest<unknown>): Promise<HttpResponse<unknown>>;
-}
+export const notFound = (res: Response): Response =>  {
+    return res.status(404).send({ error: `Word Not Found` });
+};
