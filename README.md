@@ -8,12 +8,20 @@
 
 API para o [Lexicon](https://github.com/dayannebugarim/lexicon), um jogo de adivinhação de palavras baseado em outros jogos do gênero, como o Wordle e Termo. 🙃
 
-Será utilizada a [lista de todas as palavras do português brasileiro](https://www.ime.usp.br/~pf/dicios/) disponibilizada publicamente pelo IME-USP para compor a base de dados dessa aplicação.
+Foi utilizada a [lista de todas as palavras do português brasileiro](https://www.ime.usp.br/~pf/dicios/) disponibilizada publicamente pelo IME-USP para compor a base de dados dessa aplicação.
 
 ## Documentação da API
+Todos os endpoints retornam um *JSON* com os dados no seguinte formato:
+```
+{
+    _id: string (ObjectId),
+    position: string,
+    word: string,
+    length: string,
+}
+```
 
 #### Retorna uma palavra aleatória.
-
 ```http
     GET /word/random
 ```
@@ -25,7 +33,7 @@ Será utilizada a [lista de todas as palavras do português brasileiro](https://
 ```
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
-| `length`      | `string` | Quantidade de caracteres que a palavra deve ter. |
+| `length`      | `string` | **Obrigatório**. Quantidade de caracteres que a palavra deve possuir. |
 
 #### Retorna a palavra que está em uma posição específica da lista.
 
@@ -35,3 +43,36 @@ Será utilizada a [lista de todas as palavras do português brasileiro](https://
 | Parâmetro   | Tipo       | Descrição                                   |
 | :---------- | :--------- | :------------------------------------------ |
 | `position`      | `string` | **Obrigatório**. Posição de 1 a N. |
+
+## Rodando localmente
+
+Instale as dependências
+
+```bash
+  npm install
+```
+
+Inicie o servidor
+
+```bash
+  npm run dev
+```
+
+Crie o arquivo `.env` na raiz do projeto para armazenar as variáveis de ambiente:
+
+`PORT`
+
+`MONGODB_URL`
+
+`MONGODB_USERNAME`
+
+`MONGODB_PASSWORD`
+
+`MONGODB_DATABASE`
+
+`MONGODB_COLLECTION`
+
+`FILE_PATH` (necessário para inserir os dados no banco, caminho do arquivo .txt)
+
+## Iserção das palavras no banco
+Utilize a função `wordsInsertion` que está no diretório `/utils`.
