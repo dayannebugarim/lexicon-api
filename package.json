@@ -1,14 +1,12 @@
 {
   "name": "lexicon-backend",
   "version": "1.0.0",
-  "description": "Back end do Lexicon, um jogo de adivinhação de palavras baseado em outros jogos do gênero, como Wordle e Termo.",
   "main": "server.js",
   "scripts": {
-    "build": "rimraf dist && tsc",
+    "build": "tsc",
     "dev": "tsc && nodemon --watch 'src/**' --ext ts,json --ignore src/**/*.spec.ts --exec ts-node src/server.ts",
     "test": "jest",
-    "ts.check": "tsc --project tsconfig.json",
-    "add-build": "git add dist"
+    "ts.check": "tsc --project tsconfig.json"
   },
   "author": "Dayanne Bugarim",
   "license": "ISC",
@@ -37,7 +35,6 @@
   },
   "pre-commit": [
     "ts.check",
-    "build",
-    "add-build"
+    "build"
   ]
 }
