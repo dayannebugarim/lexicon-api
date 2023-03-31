@@ -1,7 +1,7 @@
 import { router } from './routes/WordRoute';
 import express from 'express';
 import { config } from 'dotenv';
-import { MongoClient } from './database/mongo';
+import { MongoClient } from './database/MongoClient';
 
 const main = async () => {
     config();

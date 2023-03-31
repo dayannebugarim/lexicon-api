@@ -1,10 +1,10 @@
-import { wordController } from './../controllers/wordController';
+import WordController from './../controllers/WordController';
 import express from 'express';
 
 export const router = express.Router();
 
-router.get('/random', wordController.randomWordController);
+router.get('/random', new WordController().randomWordController);
 
-router.get('/:length/random', wordController.randomWordByLengthController);
+router.get('/:length/random', new WordController().randomWordByLengthController);
 
-router.get('/position/:position', wordController.wordByPositionController);
+router.get('/position/:position', new WordController().wordByPositionController);

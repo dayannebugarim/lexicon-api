@@ -1,9 +1,9 @@
-import { MongoClient } from './../database/mongo';
+import { MongoClient } from './../database/MongoClient';
 import { Document, WithId } from 'mongodb';
 
 
-export const wordService = {
-    randomWord: async (): Promise<Document | null> => {
+export default class WordService {
+    async randomWord (): Promise<Document | null> {
         const collection = MongoClient.collection;
         const data = collection.aggregate([{ $sample: { size: 1 }}]);
 
@@ -11,9 +11,9 @@ export const wordService = {
             return doc;
         }
         return null;
-    },
+    }
 
-    randomWordByLength: async (length: string): Promise<Document | null> => {
+    async randomWordByLength (length: string): Promise<Document | null> {
         const collection = MongoClient.collection;
         const data = collection.aggregate([
             { $match: { length: length } },
@@ -24,12 +24,12 @@ export const wordService = {
             return doc;
         }
         return null;
-    },
+    }
 
-    wordByPosition: async (position: string): Promise<WithId<Document> | null> => {
+    async wordByPosition (position: string): Promise<WithId<Document> | null> {
         const collection = MongoClient.collection;
         const data = await collection.findOne({ position: position });
-        
+
         return data || null;
     }
-};
+}
